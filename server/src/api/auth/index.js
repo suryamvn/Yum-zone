@@ -25,6 +25,7 @@ Router.post("/signup", async (req, res) => {
 
 Router.post("/signin", async (req, res) => {
   try {
+    console.log("inside router!!!");
     await ValidateSignin(req.body.credentials);
     const user = await UserModel.findByEmailAndPassword(req.body.credentials);
     const token = user.generateJwtToken();

@@ -20,6 +20,7 @@ Router.get(
     try {
       const { email, fullname, phoneNumber, address } = req.user;
 
+      // console.log(`inside router /user... sending ${fullname}`);
       return res.json({ user: { email, fullname, phoneNumber, address } });
     } catch (error) {
       return res.status(500).json({ error: error.message });
@@ -37,6 +38,7 @@ Router.get(
 
 Router.get("/:_id", async (req, res) => {
   try {
+    console.log("reached :id route in server!!!!!!!!!!!!!!!!");
     const { _id } = req.params;
     const getUser = await UserModel.findById(_id);
     if (!getUser) {

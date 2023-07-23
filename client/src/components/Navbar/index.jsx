@@ -6,38 +6,38 @@ import { RiSearch2Line } from "react-icons/ri";
 import { Link, useNavigate } from "react-router-dom";
 
 // components
-// import SignUp from "../Auth/Signup";
-// import SignIn from "../Auth/Signin";
+import SignUp from "../Auth/Signup";
+import SignIn from "../Auth/Signin";
 
 // redux
-// import { useSelector, useDispatch } from "react-redux";
-// import { signOut } from "../../redux/reducers/auth/auth.action";
-// import { clearUser } from "../../redux/reducers/user/user.action";
+import { useSelector, useDispatch } from "react-redux";
+import { signOut } from "../../redux/reducers/auth/auth.action";
+import { clearUser } from "../../redux/reducers/user/user.action";
 
 const MobileNav = ({
   user,
   isDropdownOpen,
   setIsDropdownOpen,
-  // signIn,
-  // signUp,
+  signIn,
+  signUp,
 }) => {
   const SignIn = () => {
-    // signIn();
+    signIn();
     setIsDropdownOpen(false);
   };
 
   const SignUp = () => {
-    // signUp();
+    signUp();
     setIsDropdownOpen(false);
   };
 
-  // const dispatch = useDispatch();
-  // const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const SignOut = () => {
-    // dispatch(signOut());
-    // dispatch(clearUser());
-    // navigate("/delivery");
+    dispatch(signOut());
+    dispatch(clearUser());
+    navigate("/delivery");
     setIsDropdownOpen(false);
   };
 
@@ -56,14 +56,14 @@ const MobileNav = ({
         <button className="bg-zomato-400 text-white py-2 px-3 rounded-full">
           Use App
         </button>
-        {user?.fullName ? (
+        {user?.email ? (
           <>
             <div
               onClick={() => setIsDropdownOpen((prev) => !prev)}
               className="border border-gray-300 text-zomato-400 w-9 h-9 rounded-full"
             >
               <img
-                src="/images/avatar.png"
+                src="https://img.freepik.com/free-icon/man_318-233556.jpg"
                 alt="avatar"
                 className="w-full h-full rounded-full object-cover"
               />
@@ -100,26 +100,26 @@ const LargeNav = ({
   user,
   isDropdownOpen,
   setIsDropdownOpen,
-  // signIn,
-  // signUp,
+  signIn,
+  signUp,
 }) => {
   const SignIn = () => {
-    // signIn();
+    signIn();
     setIsDropdownOpen(false);
   };
 
   const SignUp = () => {
-    // signUp();
+    signUp();
     setIsDropdownOpen(false);
   };
 
-  // const dispatch = useDispatch();
-  // const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const SignOut = () => {
-    // dispatch(signOut());
-    // dispatch(clearUser());
-    // navigate("/delivery");
+    dispatch(signOut());
+    dispatch(clearUser());
+    navigate("/delivery");
     setIsDropdownOpen(false);
   };
 
@@ -159,14 +159,14 @@ const LargeNav = ({
         </div>
       </div>
       <div className="flex items-center gap-3 relative">
-        {user?.fullName ? (
+        {user?.email ? (
           <>
             <div
               onClick={() => setIsDropdownOpen((prev) => !prev)}
               className="border border-gray-300 text-zomato-400 w-9 h-9 rounded-full"
             >
               <img
-                src="/images/avatar.png"
+                src="https://img.freepik.com/free-icon/man_318-233556.jpg"
                 alt="avatar"
                 className="w-full h-full rounded-full object-cover"
               />
@@ -208,32 +208,34 @@ const Navbar = () => {
 
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
-  const user = {
-    fullName: "Aditya",
-  };
+  // const user = {
+  //   fullName: "Aditya",
+  // };
 
-  // const user = useSelector((globalState) => globalState.user);
+  const user = useSelector((globalState) => globalState.user);
+  // console.log(`full name: ${user.fullName}`);
 
   return (
     <>
-      {/* <SignIn isOpen={openSignIn} setIsOpen={setOpenSignIn} /> */}
-      {/* <SignUp isOpen={openSignUp} setIsOpen={setOpenSignUp} /> */}
+      <SignIn isOpen={openSignIn} setIsOpen={setOpenSignIn} />
+      <SignUp isOpen={openSignUp} setIsOpen={setOpenSignUp} />
 
       <nav className="p-4 lg:py-2 flex bg-white shadow-md lg:shadow-none lg:border-b-2 border-gray-100 w-full items-center">
+        {/* {console.log(user)} */}
         <MobileNav
           user={user}
           setIsDropdownOpen={setIsDropdownOpen}
           isDropdownOpen={isDropdownOpen}
-          // signIn={openSignInModal}
-          // signUp={openSignUpModal}
+          signIn={openSignInModal}
+          signUp={openSignUpModal}
         />
 
         <LargeNav
-          // user={user}
+          user={user}
           setIsDropdownOpen={setIsDropdownOpen}
           isDropdownOpen={isDropdownOpen}
-          // signIn={openSignInModal}
-          // signUp={openSignUpModal}
+          signIn={openSignInModal}
+          signUp={openSignUpModal}
         />
       </nav>
     </>

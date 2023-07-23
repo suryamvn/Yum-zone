@@ -19,6 +19,8 @@ Router.get("/list/:_id", async (req, res) => {
         .status(404)
         .json({ error: "No menu present for this restaurant" });
     }
+    // console.log("\n");
+    // console.log(menus.menus[0].items);
     return res.json({ menus });
   } catch (error) {
     return res.status(500).json({ error: error.message });

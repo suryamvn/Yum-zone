@@ -3,8 +3,8 @@ import { Link } from "react-router-dom";
 import { AiTwotoneStar } from "react-icons/ai";
 
 // redux
-// import { useDispatch } from "react-redux";
-// import { getImage } from "../redux/reducers/image/image.action";
+import { useDispatch } from "react-redux";
+import { getImage } from "../redux/reducers/image/image.action";
 
 const RestaurantCard = (props) => {
   const [image, setImage] = useState({
@@ -16,14 +16,14 @@ const RestaurantCard = (props) => {
     ],
   });
 
-  //   const dispatch = useDispatch();
+  // const dispatch = useDispatch();
 
-  //   useEffect(() => {
-  //     //   dispatch(getImage(props.photos)).then((data) => {
+  // useEffect(() => {
+  //   dispatch(getImage(props.photos)).then((data) => {
   //     const images = data.payload.images;
   //     setImage((prev) => ({ ...prev, images }));
-  //     //   });
-  //   }, [props.photos]);
+  //   });
+  // }, [props.photos]);
 
   return (
     <Link

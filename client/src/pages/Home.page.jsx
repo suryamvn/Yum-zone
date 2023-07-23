@@ -11,17 +11,17 @@ import NightLife from "../components/NightLife";
 import Nutrition from "../components/Nutrition";
 
 // redux
-// import { useDispatch } from "react-redux";
-// import { getRestaurant } from "../redux/reducers/restaurant/restaurant.action";
+import { useDispatch } from "react-redux";
+import { getRestaurant } from "../redux/reducers/restaurant/restaurant.action";
 
 const Home = () => {
   const { type } = useParams();
 
-  // const dispatch = useDispatch();
+  const dispatch = useDispatch();
 
-  // useEffect(() => {
-  //   dispatch(getRestaurant());
-  // }, []);
+  useEffect(() => {
+    dispatch(getRestaurant());
+  }, []);
 
   return (
     <>

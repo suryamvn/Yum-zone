@@ -14,30 +14,30 @@ import ReviewCard from "../Reviews/ReviewCard";
 import MapView from "./MapView";
 
 // redux
-// import { useSelector, useDispatch } from "react-redux";
-// import { useEffect } from "react";
-// import { getReview } from "../../redux/reducers/review/review.action";
+import { useSelector, useDispatch } from "react-redux";
+import { useEffect } from "react";
+import { getReview } from "../../redux/reducers/review/review.action";
 // import { getImage } from "../../redux/reducers/image/image.action";
 
 const Overview = () => {
-  // const [restaurant, setRestaurant] = useState({ cuisine: [] });
-  const [restaurant, setRestaurant] = useState({
-    _id: "124ksjf435245jfdfv34fg3",
-    isPro: true,
-    isOff: true,
-    name: "Nathu's Sweets",
-    restaurantReviewValue: "3.7",
-    cuisine: [
-      "Mithai",
-      "South Indian",
-      "Chinese",
-      "Street Food",
-      "Fast Food",
-      "Desserts",
-      "North Indian",
-    ],
-    averageCost: "450",
-  });
+  const [restaurant, setRestaurant] = useState({ cuisine: [] });
+  // const [restaurant, setRestaurant] = useState({
+  //   _id: "124ksjf435245jfdfv34fg3",
+  //   isPro: true,
+  //   isOff: true,
+  //   name: "Nathu's Sweets",
+  //   restaurantReviewValue: "3.7",
+  //   cuisine: [
+  //     "Mithai",
+  //     "South Indian",
+  //     "Chinese",
+  //     "Street Food",
+  //     "Fast Food",
+  //     "Desserts",
+  //     "North Indian",
+  //   ],
+  //   averageCost: "450",
+  // });
   const [menuImages, setMenuImages] = useState([
     "https://b.zmtcdn.com/data/menus/282/18617282/f9e37ac4a32c94c8ca2b5f0bf22ffc84.jpg",
     "https://b.zmtcdn.com/data/menus/282/18617282/9fe671c9eed84225957af7602a0109fd.jpg",
@@ -46,38 +46,41 @@ const Overview = () => {
     "https://b.zmtcdn.com/data/menus/282/18617282/1fae3fb96e578e6b8b3f3e68147017b9.jpg",
   ]);
   const [reviews, setReviews] = useState([
-    {
-      rating: 3.5,
-      isRestaurantReview: false,
-    },
+    // {
+    //   rating: 5,
+    //   isRestaurantReview: false,
+    //   createdAt: "Fri Oct 14 2022 20:20:34 GMT+0530 (Indian Standard Time)",
+    //   reviewText:
+    //     "I have visited this place ambience was good staff is very nice and food was awesome...recommend this place to everyone 👍",
+    // },
   ]);
 
   const { id } = useParams;
-  // const dispatch = useDispatch();
+  const dispatch = useDispatch();
 
-  // const reduxState = useSelector(
-  //   (globalState) => globalState.restaurant.selectedRestaurant.restaurant
-  // );
+  const reduxState = useSelector(
+    (globalState) => globalState.restaurant.selectedRestaurant.restaurant
+  );
 
-  // useEffect(() => {
-  //   if (reduxState) {
-  //     setRestaurant(reduxState);
-  //   }
-  // }, [reduxState]);
+  useEffect(() => {
+    if (reduxState) {
+      setRestaurant(reduxState);
+    }
+  }, [reduxState]);
 
-  // useEffect(() => {
-  //   if (reduxState) {
-  //     dispatch(getImage(reduxState?.menuImages)).then((data) => {
-  //       const images = [];
-  //       data.payload.images.map(({ location }) => images.push(location));
-  //       setMenuImages(images);
-  //     });
+  useEffect(() => {
+    if (reduxState) {
+      // dispatch(getImage(reduxState?.menuImages)).then((data) => {
+      //   const images = [];
+      //   data.payload.images.map(({ location }) => images.push(location));
+      //   setMenuImages(images);
+      // });
 
-  //     dispatch(getReview(reduxState?._id)).then((data) => {
-  //       setReviews(data.payload.reviews);
-  //     });
-  //   }
-  // }, [reduxState]);
+      dispatch(getReview(reduxState?._id)).then((data) => {
+        setReviews(data.payload.reviews);
+      });
+    }
+  }, [reduxState]);
 
   const slideConfig = {
     slidesPerView: 1,

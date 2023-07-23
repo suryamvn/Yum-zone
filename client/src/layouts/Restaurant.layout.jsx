@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { TiStarOutline } from "react-icons/ti";
 import { RiDirectionLine, RiShareForwardLine } from "react-icons/ri";
@@ -11,6 +11,11 @@ import InfoButton from "../components/Restaurant/InfoButton";
 import RestaurantInfo from "../components/Restaurant/RestaurantInfo";
 import Tabs from "../components/Restaurant/Tabs";
 import CartContainer from "../components/Cart/CartContainer";
+
+//redux
+import { useDispatch } from "react-redux";
+import { getSpecificRestaurant } from "../redux/reducers/restaurant/restaurant.action";
+import { getImage } from "../redux/reducers/image/image.action";
 
 const RestaurantLayout = ({ children: Component, ...props }) => {
   const [restaurant, setRestaurant] = useState({
@@ -40,31 +45,31 @@ const RestaurantLayout = ({ children: Component, ...props }) => {
           "https://t3.ftcdn.net/jpg/03/24/73/92/360_F_324739203_keeq8udvv0P2h1MLYJ0GLSlTBagoXS48.jpg",
       },
     ],
-    name: "Dominos Pizza",
-    cuisine: ["Pizza", "Veg", "Non-veg"],
-    address: "Near South India Shopping mall, Miyapur",
+    name: "",
+    cuisine: "",
+    address: "",
     restaurantRating: 4.1,
     deliveryRating: 3.2,
   });
 
-  // const dispatch = useDispatch();
+  const dispatch = useDispatch();
   const { id } = useParams();
 
-  // useEffect(() => {
-  //   dispatch(getSpecificRestaurant(id)).then((data) => {
-  //     setRestaurant((prev) => ({
-  //       ...prev,
-  //       ...data.payload.restaurant,
-  //     }));
+  useEffect(() => {
+    dispatch(getSpecificRestaurant(id)).then((data) => {
+      setRestaurant((prev) => ({
+        ...prev,
+        ...data.payload.restaurant,
+      }));
 
-  //     dispatch(getImage(data.payload.restaurant.photos)).then((data) => {
-  //       setRestaurant((prev) => ({
-  //         ...prev,
-  //         images: data.payload.images,
-  //       }));
-  //     });
-  //   });
-  // }, []);
+      // dispatch(getImage(data.payload.restaurant.photos)).then((data) => {
+      //   setRestaurant((prev) => ({
+      //     ...prev,
+      //     images: data.payload.images,
+      //   }));
+      // });
+    });
+  }, []);
 
   return (
     <>

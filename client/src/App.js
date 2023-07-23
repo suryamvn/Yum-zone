@@ -1,4 +1,5 @@
 import "./App.css";
+import { useEffect } from "react";
 import { Routes, Route, Navigate } from "react-router-dom";
 
 // pages
@@ -10,14 +11,24 @@ import Restaurant from "./pages/Restaurant.page";
 // components
 import Overview from "./components/Restaurant/Overview";
 import OrderOnline from "./components/Restaurant/OrderOnline";
+import Menu from "./components/Restaurant/Menu";
 import Reviews from "./components/Restaurant/Reviews";
 import Photos from "./components/Restaurant/Photos";
-import Menu from "./components/Restaurant/Menu";
 import RestaurantLayout from "./layouts/Restaurant.layout";
 
-// layouts
+// redux
+import { useDispatch } from "react-redux";
+import { getMySelf } from "./redux/reducers/user/user.action";
+import { getCart } from "./redux/reducers/cart/cart.action";
 
 function App() {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getMySelf());
+    dispatch(getCart());
+  }, [localStorage]);
+
   return (
     <>
       <Routes>
@@ -25,7 +36,6 @@ function App() {
         <Route path="/:type" element={<Home />} />
         {/* <Route path="/restaurant/:id" element={<RedirectRestaurant />} /> */}
         <Route path="/google/:token" element={<GoogleAuth />} />
-        {/* subroutes below used in restaurant page, used for not loading the whole page but only to load the following sections in the page */}
         <Route
           path="/restaurant/:id"
           element={
@@ -40,7 +50,7 @@ function App() {
           <Route path="menu" element={<Menu />} />
           <Route path="photos" element={<Photos />} />
         </Route>
-        <Route path="checkout/orders" element={<Checkout />} />
+        <Route path="/checkout/orders" element={<Checkout />} />
       </Routes>
     </>
   );
