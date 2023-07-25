@@ -11,6 +11,15 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
+  "devDependencies": {
+    "@babel/cli": "^7.20.7",
+    "@babel/core": "^7.20.7",
+    "@babel/node": "^7.20.7",
+    "@babel/preset-env": "^7.20.2",
+    "@babel/plugin-proposal-class-properties": "^7.4.4",
+    "@babel/plugin-proposal-object-rest-spread": "^7.0.0",
+    "nodemon": "^2.0.20"
+  },
   "dependencies": {
     "aws-sdk": "^2.1290.0",
     "bcryptjs": "^2.4.3",
@@ -26,12 +35,5 @@
     "passport": "^0.6.0",
     "passport-google-oauth2": "^0.2.0",
     "passport-jwt": "^4.0.1"
-  },
-  "devDependencies": {
-    "@babel/cli": "^7.20.7",
-    "@babel/core": "^7.20.7",
-    "@babel/node": "^7.20.7",
-    "@babel/preset-env": "^7.20.2",
-    "nodemon": "^2.0.20"
   }
 }
